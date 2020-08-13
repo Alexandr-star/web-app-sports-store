@@ -3,6 +3,7 @@ using System.Linq;
 using Moq;
 using SportsStore.Controllers;
 using SportsStore.Models;
+using SportsStore.Models.ViewModels;
 using Xunit;
 
 namespace SportsSpre.Test
@@ -21,15 +22,15 @@ namespace SportsSpre.Test
                 new Product { ProductId = 5, Name = "P5" }
             }).AsQueryable<Product>());
 
-            ProductController controller = new ProductController(mock.Object);
-            controller.PageSize = 3;
+            ProductController controller = new ProductController(mock.Object)   { PageSize = 3 };
 
-            IEnumerable<Product> result = controller.List(2).ViewData.Model as IEnumerable<Product>;
+            ProductsListViewModel result = controller.List(2).ViewData.Model as ProductsListViewModel;
 
-            Product[] prodArray = result.ToArray();
-            Assert.True(prodArray.Length == 2);
-            Assert.Equal("P4", prodArray[0].Name);
-            Assert.Equal("P5", prodArray[1].Name);
+            PagingInfo pagingInfo = result.PagingInfo;
+            Assert.Equal(2, pagingInfo.CurrentPage);
+            Assert.Equal(3, pagingInfo.ItemsPerPage);
+            Assert.Equal(5, pagingInfo.TotalItems);
+            Assert.Equal(2, pagingInfo.TotalPages);
         }
     }
 }
