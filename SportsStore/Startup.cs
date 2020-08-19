@@ -58,16 +58,8 @@ namespace SportsStore
             // обработка http-запросов
             app.UseEndpoints(endpoints =>
             {
+                
                 endpoints.MapControllerRoute(
-                    name: "pagination",
-                    pattern: "Products/Page{productPage}",
-                    defaults: new { Controller = "Product", action = "List"}
-                );
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Product}/{action=List}/{id?}"
-                );
-                /*endpoints.MapControllerRoute(
                     name: null,
                     pattern: "{category}/Page{productPage:int}",
                     defaults: new { controller = "Product", action = "List" }
@@ -87,8 +79,25 @@ namespace SportsStore
                     pattern: "",
                     defaults: new { controller = "Product", action = "List", productPage = 1 }
                 );
+
                 endpoints.MapControllerRoute(
                     name: null,
+                    pattern: "Products/Page{productPage}",
+                    defaults: new { Controller = "Product", action = "List"}
+                );
+
+                endpoints.MapControllerRoute(
+                    name: null,
+                    pattern: "{controller=Product}/{action=List}/{id?}"
+                );
+
+                /*endpoints.MapControllerRoute(
+                    name: "pagination",
+                    pattern: "Products/Page{productPage}",
+                    defaults: new { Controller = "Product", action = "List"}
+                );
+                endpoints.MapControllerRoute(
+                    name: "default",
                     pattern: "{controller=Product}/{action=List}/{id?}"
                 );*/
             });
