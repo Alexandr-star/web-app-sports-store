@@ -57,6 +57,7 @@ namespace SportsStore
             app.UseRouting();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             // обработка http-запросов
             app.UseEndpoints(endpoints =>
             {
