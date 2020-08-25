@@ -26,7 +26,7 @@ namespace SportsStore.Models
             lineCollection.RemoveAll(line => line.Product.ProductId == product.ProductId);
         public virtual decimal ComputeTotalValue() =>
             lineCollection.Sum(element => element.Product.Price * element.Quality);
-        public virtual void Clean() => lineCollection.Clear();
+        public virtual void Clear() => lineCollection.Clear();
         public virtual IEnumerable<CartLine> Lines => lineCollection;
     }
 

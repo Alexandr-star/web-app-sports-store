@@ -41,6 +41,11 @@ namespace SportsStore
                 }
             });            
             services.AddTransient<IProductRepository, EFProdutRepository>();
+            // Получает кллекцию служб, которые были зарегестрированны, и передает методу SessionCart.
+            // Запросы для службы Cart будут обрабатываться путем создания объектов SessionCart,
+            // Которые сериализуют сами себя как данные сеанса, когда они модифицируются.
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();

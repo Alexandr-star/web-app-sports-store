@@ -91,7 +91,7 @@ namespace SportsStore.Tests
             //When
             target.AddItem(p1, 1);
             target.AddItem(p2, 1);
-            target.Clean();
+            target.Clear();
             //Then
             Assert.Equal(0, target.Lines.Count());
         }
