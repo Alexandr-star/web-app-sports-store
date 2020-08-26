@@ -46,6 +46,7 @@ namespace SportsStore
             // Которые сериализуют сами себя как данные сеанса, когда они модифицируются.
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
